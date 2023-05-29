@@ -1,0 +1,7 @@
+{
+  "name": "Final Countdown",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
