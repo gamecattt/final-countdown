@@ -1,7 +1,8 @@
-import {useState} from "react";
-import {checkmarkOutline, closeCircleOutline, createOutline, trashOutline} from "ionicons/icons";
+import {useEffect, useState} from "react";
+import {closeCircleOutline, createOutline} from "ionicons/icons";
 import {IonIcon} from "@ionic/react";
 import './EventsList.css';
+import countdown from '../../utils/countdown.min.js';
 
 const EventsList: React.FC = () => {
 
@@ -13,6 +14,15 @@ const EventsList: React.FC = () => {
     const [eventDate, setEventDate] = useState('2023-05-29');
     const [lastId, setLastId] = useState(events.length);
     const [updateId, setUpdateId] = useState(null);
+
+    useEffect(() => {
+        const fakeData = [];
+        for (let i = 1; i <= 30; i++) {
+            fakeData.push({ id: i, title: 'Чистка зубов', date: '2023-10-06' })
+        }
+        setEvents(fakeData);
+    }, [])
+
 
     function clearAll() {
         setEvents([])
@@ -55,22 +65,19 @@ const EventsList: React.FC = () => {
         setUpdateId(event.id);
     }
 
+    const formatDate = (date) => {
+        const d = countdown(Date.parse(date));
+        return `${d.years}г ${d.months}мес ${d.days}дн ${d.hours}ч ${d.minutes}мин`;
+    };
+
     return (
-        <div className="container">
-            <form className="create-event" action="#" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Событие" onChange={onTitleChange} value={eventTitle} required/>
-                <input type="date" onChange={onDateChange} value={eventDate} required/>
-                <button className="btn btn_type_submit" type="submit">
-                    {updateId ? 'Сохранить' : 'Добавить' }
-                    <IonIcon icon={checkmarkOutline}></IonIcon>
-                </button>
-            </form>
+        <>
             <div className="event-list">
                 {events.map(event =>
                     <div className="event-item" key={event.id}>
                         <div className="event-item__info">
                             <div className="event-item__title">{event.title}</div>
-                            <div className="event-item__timer">Осталось {event.date}</div>
+                            <div className="event-item__timer">Осталось {formatDate(event.date)}</div>
                         </div>
                         <div className="event-item__actions">
                             <button className="btn btn_type_edit" onClick={() => updateEvent(event)}>
@@ -84,11 +91,10 @@ const EventsList: React.FC = () => {
                 )}
             </div>
             {events.length ?
-                <button className="btn btn_type_clear" onClick={clearAll}>
+                <div className="btn btn_type_clear" onClick={clearAll}>
                     Очистить всё
-                    <IonIcon icon={trashOutline}></IonIcon>
-                </button> : ''}
-        </div>
+                </div> : ''}
+        </>
     );
 };
 

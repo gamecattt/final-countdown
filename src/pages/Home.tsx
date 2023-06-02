@@ -11,7 +11,7 @@ const Home: React.FC = () => {
                     <IonTitle>Обратный отсчет</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent fullscreen>
+            <IonContent fullscreen className="ion-padding-horizontal content">
                 <IonHeader collapse="condense">
                     <IonToolbar>
                         <IonTitle size="large">Обратный отсчет</IonTitle>
