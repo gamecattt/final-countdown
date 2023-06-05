@@ -1,0 +1,8 @@
+.btn_type_clear {
+    color: red;
+    cursor: pointer;
+}
+
+.btn_type_clear.visible {
+    display: flex;
+}

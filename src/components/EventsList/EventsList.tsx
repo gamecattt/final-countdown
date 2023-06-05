@@ -3,6 +3,7 @@ import {closeCircleOutline, createOutline} from "ionicons/icons";
 import {IonIcon} from "@ionic/react";
 import './EventsList.css';
 import countdown from '../../utils/countdown.min.js';
+import ClearAll from "../ClearAll/ClearAll";
 
 const EventsList: React.FC = () => {
 
@@ -90,10 +91,7 @@ const EventsList: React.FC = () => {
                     </div>
                 )}
             </div>
-            {events.length ?
-                <div className="btn btn_type_clear" onClick={clearAll}>
-                    Очистить всё
-                </div> : ''}
+            {events.length ? <ClearAll handler={clearAll} /> : ''}
         </>
     );
 };

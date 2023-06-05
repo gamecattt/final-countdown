@@ -30,16 +30,8 @@
 .btn_type_add {
 }
 
-.btn_type_clear {
-   color: red;
-}
-
 .btn_type_submit {
     padding: 0 10px;
-}
-
-.btn_type_clear.visible {
-    display: flex;
 }
 
 .event-list {
